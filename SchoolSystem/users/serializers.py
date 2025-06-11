@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from core.serializers import BaseModelSerializer
-
+from users.choices import UserTypeChoices
 User = get_user_model()
 
 
@@ -27,11 +27,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ("username", "email", "phone_number", "password", "user_type")
 
     def create(self, validated_data):
+        user_type = validated_data.get("user_type", UserTypeChoices.STUDENT)  # Use TEACHER if not provided
+
         user = User.objects.create_user(
             username=validated_data["username"],
             email=validated_data["email"],
             phone_number=validated_data["phone_number"],
-            user_type=validated_data["user_type"],
+            user_type=user_type,
             password=validated_data["password"]
         )
         return user
