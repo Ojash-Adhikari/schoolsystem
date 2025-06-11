@@ -1,10 +1,10 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
-
+from core.models import BaseModel
 from users.choices import UserTypeChoices
 # Create your models here.
-class User(AbstractUser):
+class User(BaseModel, AbstractUser):
     user_type = models.CharField(
         max_length=20,
         choices=UserTypeChoices.choices,

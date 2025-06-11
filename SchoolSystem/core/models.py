@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from SchoolSystem.settings import AUTH_USER_MODEL
 from django.core.validators import (
     MaxLengthValidator,
     MinLengthValidator,
@@ -8,8 +8,6 @@ from django.db import models
 from django.utils import timezone
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
-
-User = get_user_model()
 
 class BaseManager(models.Manager):
     def get_queryset(self):
@@ -40,21 +38,21 @@ class BaseModel(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     created_by = models.ForeignKey(
-        User,
+        AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         related_name="created_%(app_label)s_%(class)s",
         null=True,
         blank=True,
         )
     updated_by = models.ForeignKey(
-        User,
+        AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         related_name="updated_%(app_label)s_%(class)s",
         null=True,
         blank=True,
         )
     deleted_by = models.ForeignKey(
-        User,
+        AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         related_name="deleted_%(app_label)s_%(class)s",
         null=True,
