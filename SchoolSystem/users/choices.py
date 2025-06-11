@@ -7,3 +7,6 @@ class UserTypeChoices(TextChoices):
     TEACHER = "TEACHER", _("Teacher")
     STUDENT = "STUDENT", _("Student")
 
+class EnrollmentChoices(TextChoices):
+    PENDING = "PENDING", _("Pending")
+    ENROLLED = "ENROLLED", _("Enrolled")

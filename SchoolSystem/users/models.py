@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from core.models import BaseModel
-from users.choices import UserTypeChoices
+from users.choices import UserTypeChoices, EnrollmentChoices
 # Create your models here.
 class User(BaseModel, AbstractUser):
     user_type = models.CharField(
@@ -12,6 +12,11 @@ class User(BaseModel, AbstractUser):
         )
     email = models.EmailField(unique=True)
     phone_number = PhoneNumberField(unique=True)
+    is_enrolled = models.CharField(
+        max_length=20,
+        choices=EnrollmentChoices.choices,
+        default=EnrollmentChoices.PENDING
+    )
 
     @property
     def profile(self):
