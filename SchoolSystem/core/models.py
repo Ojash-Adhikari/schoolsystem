@@ -8,8 +8,9 @@ from django.db import models
 from django.utils import timezone
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import UserManager
 
-class BaseManager(models.Manager):
+class BaseManager(UserManager):
     def get_queryset(self):
         return super().get_queryset().filter(is_deleted=False)
 
