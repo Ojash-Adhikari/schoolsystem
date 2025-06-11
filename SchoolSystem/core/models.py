@@ -60,8 +60,8 @@ class BaseModel(models.Model):
         blank=True,
         )
 
-    created_at = models.DateTimeField(editable=False)
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(editable=False, blank=True, null=True)
+    updated_at = models.DateTimeField(blank=True, null=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
 
     objects = BaseManager()
